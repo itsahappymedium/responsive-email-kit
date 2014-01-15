@@ -131,7 +131,16 @@ module.exports = function(grunt) {
                 partialPaths: ['<%= paths.partials %>']
             },
 
-            html: {
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.templates %>',
+                    src: ['**/*.html'],
+                    dest: '<%= paths.dist %>'
+                }]
+            },
+
+            dist: {
                 files: [{
                     expand: true,
                     cwd: '<%= paths.templates %>',
@@ -147,14 +156,14 @@ module.exports = function(grunt) {
         watch : {
         	// Watch the .SCSS files for changes and recompile them
             sass: {
-                files: ['sass/*.scss'],
-                tasks: ['compass', 'clean', 'copy', 'premailer', 'htmlbuild']
+                files: ['<%= paths.sass %>/*.scss'],
+                tasks: ['dev']
             },
 
             // Watch the template files for changes, inline their css files again, and recompile them
             templates: {
-            	files: ['templates/*.html'],
-            	tasks: ['clean', 'copy', 'premailer', 'htmlbuild']
+            	files: ['<%= paths.templates %>/*.html', '<%= paths.partials %>/*.html', '<%= paths.data %>/*.json %>'],
+            	tasks: ['dev']
             },
             
             // Watch our files for changes and reload the browser
@@ -167,7 +176,12 @@ module.exports = function(grunt) {
         }
 	});
 
-    grunt.registerTask('dist', ['compass', 'clean', 'imagemin', 'render', 'premailer', 'htmlbuild']);
+    // In development, do everything but premailer and imagemin
+    grunt.registerTask('dev', ['compass', 'clean', 'render:dev', 'htmlbuild']);
 
-	grunt.registerTask('default', ['compass', 'clean', 'copy', 'render', 'premailer', 'htmlbuild']);
+    // To distribute, do the other two steps
+    grunt.registerTask('dist', ['compass', 'clean', 'imagemin', 'render:dist', 'premailer', 'htmlbuild']);
+
+    // By default, do the dev version
+	grunt.registerTask('default', ['dev']);
 }
