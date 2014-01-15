@@ -1,0 +1,28 @@
+{
+	"links": [
+		{
+			"text": "Here's an important thing &raquo;",
+			"url": "http://google.com"
+		},
+		{
+			"text": "Here's another thing &raquo;",
+			"url": "http://google.com"
+		},
+		{
+			"text": "Here's one more thing &raquo;",
+			"url": "http://google.com"
+		},
+		{
+			"text": "Here's a link &raquo;",
+			"url": "http://google.com"
+		},
+		{
+			"text": "Here's a huge news item &raquo;",
+			"url": "http://google.com"
+		},
+		{
+			"text": "Here's a thing &raquo;",
+			"url": "http://google.com"
+		}
+	]
+}

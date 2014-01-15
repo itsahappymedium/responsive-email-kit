@@ -16,6 +16,9 @@ module.exports = function(grunt) {
         	// Store the finished files here
             dist: 'dist',
 
+            // Temporary folder to build things
+            tmp: 'tmp',
+
             // Where our images are located
             images: 'img',
             
@@ -26,14 +29,20 @@ module.exports = function(grunt) {
             sass: 'sass',
             
             // Where are CSS is located
-            css: 'css'
+            css: 'css',
+
+            // Where data files are living
+            data: 'data',
+
+            // Where partials are living
+            partials: 'partials'
         },
 
         /**
          * Before generating any new files, clean the /dist/ directory.
          */
         clean: {
-            dist: ['<%= paths.dist %>']
+            dist: ['<%= paths.dist %>', '<%= paths.tmp %>']
         },
 
         /**
@@ -55,8 +64,8 @@ module.exports = function(grunt) {
          * This doesn't minify them, but you can run grunt dist to minify them and copy them over.
 	     */
 	    copy: {
-            images: {
-                files: [{
+            dist: {
+                images: [{
                     expand: true,
                     cwd: '<%= paths.images %>',
                     src: ['**/*.{gif,png,jpg}'],
@@ -106,9 +115,37 @@ module.exports = function(grunt) {
             main: {
                 files: [{
                     expand: true,
-                    cwd: '<%= paths.templates %>',
+                    cwd: '<%= paths.tmp %>',
                     src: ['**/*.html'],
                     dest: '<%= paths.dist %>/'
+                }]
+            }
+        },
+
+        /**
+         * Render EJS templates and data into HTML documents
+         */
+        render: {
+            options: {
+                data: ['<%= paths.data %>/*.json'],
+                partialPaths: ['<%= paths.partials %>']
+            },
+
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.templates %>',
+                    src: ['**/*.html'],
+                    dest: '<%= paths.dist %>'
+                }]
+            },
+
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.templates %>',
+                    src: ['**/*.html'],
+                    dest: '<%= paths.tmp %>'
                 }]
             }
         },
@@ -119,14 +156,14 @@ module.exports = function(grunt) {
         watch : {
         	// Watch the .SCSS files for changes and recompile them
             sass: {
-                files: ['sass/*.scss'],
-                tasks: ['compass', 'clean', 'copy', 'premailer', 'htmlbuild']
+                files: ['<%= paths.sass %>/*.scss'],
+                tasks: ['dev']
             },
 
             // Watch the template files for changes, inline their css files again, and recompile them
             templates: {
-            	files: ['templates/*.html'],
-            	tasks: ['clean', 'copy', 'premailer', 'htmlbuild']
+            	files: ['<%= paths.templates %>/*.html', '<%= paths.partials %>/*.html', '<%= paths.data %>/*.json %>'],
+            	tasks: ['dev']
             },
             
             // Watch our files for changes and reload the browser
@@ -139,7 +176,12 @@ module.exports = function(grunt) {
         }
 	});
 
-    grunt.registerTask('dist', ['compass', 'clean', 'imagemin', 'premailer', 'htmlbuild']);
+    // In development, do everything but premailer and imagemin
+    grunt.registerTask('dev', ['compass', 'clean', 'render:dev', 'htmlbuild']);
 
-	grunt.registerTask('default', ['compass', 'clean', 'copy', 'premailer', 'htmlbuild']);
+    // To distribute, do the other two steps
+    grunt.registerTask('dist', ['compass', 'clean', 'imagemin', 'render:dist', 'premailer', 'htmlbuild']);
+
+    // By default, do the dev version
+	grunt.registerTask('default', ['dev']);
 }
