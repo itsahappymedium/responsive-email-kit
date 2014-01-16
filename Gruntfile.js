@@ -64,13 +64,11 @@ module.exports = function(grunt) {
          * This doesn't minify them, but you can run grunt dist to minify them and copy them over.
 	     */
 	    copy: {
-            dist: {
-                images: [{
-                    expand: true,
-                    cwd: '<%= paths.images %>',
-                    src: ['**/*.{gif,png,jpg}'],
-                    dest: '<%= paths.dist %>/img'
-                }]
+            images: {
+                expand: true,
+                cwd: '<%= paths.images %>',
+                src: ['**/*.{gif,png,jpg}'],
+                dest: '<%= paths.dist %>/img'
             }
         },
 
@@ -177,7 +175,7 @@ module.exports = function(grunt) {
 	});
 
     // In development, do everything but premailer and imagemin
-    grunt.registerTask('dev', ['compass', 'clean', 'render:dev', 'htmlbuild']);
+    grunt.registerTask('dev', ['compass', 'clean', 'copy', 'render:dev', 'htmlbuild']);
 
     // To distribute, do the other two steps
     grunt.registerTask('dist', ['compass', 'clean', 'imagemin', 'render:dist', 'premailer', 'htmlbuild']);
