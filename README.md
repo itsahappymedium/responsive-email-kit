@@ -7,21 +7,21 @@ A fork of Zurb's excellent [Ink responsive email template system](http://zurb.co
 
 Download this repository as a ZIP file or clone it to your local machine:
 
-		git clone git@github.com:happymedium/responsive-email-kit.git
+	git clone git@github.com:happymedium/responsive-email-kit.git
 
 You'll also need the following Rubygem dependencies installed (if you don't already have them):
 
-		gem install compass
-		gem install premailer
-		gem install hpricot
+	gem install compass
+	gem install premailer
+	gem install hpricot
 
 You'll of course need [NodeJS](http://nodejs.org) with NPM running. We'll be using [Grunt](http://gruntjs.com) for this project, so let's install the command line client:
 
-		sudo npm install -g grunt-cli
+	sudo npm install -g grunt-cli
 
 Now, head to the root of your local repository and install the Node dependencies:
 
-		npm install
+	npm install
 
 ## Usage
 
