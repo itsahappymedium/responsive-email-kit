@@ -33,8 +33,6 @@ To compile your assets during development, run `grunt` in the command line. This
 * Render each of the files with corresponding EJS templates and partials, if used. The files are placed in `/dist/`.
 * Insert the `mq.css` stylesheet in the document `<head>` (so the media queries don't get stripped).
 
-`grunt dist`
-
 Once you've compiled assets for the first time, navigate to the `/dist/` folder in your browser and select one of the HTML files to view.
 
 ### Watch for Updates
