@@ -160,7 +160,7 @@ module.exports = function(grunt) {
 
             // Watch the template files for changes, inline their css files again, and recompile them
             templates: {
-            	files: ['<%= paths.templates %>/*.html', '<%= paths.partials %>/*.html', '<%= paths.data %>/*.json'],
+            	files: ['<%= paths.templates %>/*.html', '<%= paths.partials %>/**/*.html', '<%= paths.data %>/*.json'],
             	tasks: ['dev']
             },
             
