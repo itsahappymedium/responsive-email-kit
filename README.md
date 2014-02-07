@@ -1,7 +1,7 @@
 Responsive Email Kit
 ====================
 
-A fork of Zurb's excellent [Ink responsive email template system](http://zurb.com/ink/) integrated into a Grunt and Sass/Compass workflow for automated CSS inlining, quicker editing, and image minification.
+A fork of Zurb's excellent [Ink responsive email template system](http://zurb.com/ink/) integrated into a Grunt and Sass/Compass workflow for automated CSS inlining, quicker editing, image minification, and email testing.
 
 ## Installation
 
@@ -52,6 +52,14 @@ Remember, your CSS has already been inlined, so you don't need to do that step m
 
 You will also need to upload your images from the `/dist/img/` folder to whatever email marketing service you use.
 
+### Email Testing
+
+You can use [Nodemailer](https://github.com/andris9/Nodemailer) to send a test email with your template via the command line.
+
+1. Configure the Sender and Recipient fields within the `nodemailer` task in `Gruntfile.js`
+2. Set the values of your transport method inside `config/nodemailer-transport.json`. An example Gmail method is there right now; you can check [Nodemailer's site](https://github.com/andris9/Nodemailer#well-known-services-for-smtp) for other options.
+3. From the command line, run `grunt send --template=YOURTEMPLATENAME` (without the `.html` appended). This will run the `dist` task before sending it using Nodemailer.
+
 ## Editing
 
 Edit templates within the `/templates/` directory. You can add or remove them as you'd like.
@@ -59,6 +67,15 @@ Edit templates within the `/templates/` directory. You can add or remove them as
 To add new CSS files, it is recommended to create a new Sass (`.scss`) file for your template. Grunt will automatically compile any `.scss` files to `.css` (if they don't have an underscore `_` prepended).
 
 ## Changelog
+
+### 1.2.0
+
+Fixed a few bugs and implemented email testing.
+
+* Fix error in JSON watch path
+* Update partials watch path to account for nested partials
+* Implement Nodemailer and Grunt send task (thanks to @dwightjack and his [Grunt Email Boilerplate](https://github.com/dwightjack/grunt-email-boilerplate) for inspiration)
+* Updated the `htmlbuild` task and tags to have the basic stylesheet also printed out in a `<style>` tag, allowing for usage of web fonts and other things that get stripped
 
 ### 1.1.0
 
