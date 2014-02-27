@@ -13,7 +13,7 @@ You'll also need the following Rubygem dependencies installed (if you don't alre
 
 	gem install compass
 	gem install premailer
-	gem install hpricot
+	gem install nokogiri
 
 You'll of course need [NodeJS](http://nodejs.org) with NPM running. We'll be using [Grunt](http://gruntjs.com) for this project, so let's install the command line client:
 
@@ -67,6 +67,10 @@ Edit templates within the `/templates/` directory. You can add or remove them as
 To add new CSS files, it is recommended to create a new Sass (`.scss`) file for your template. Grunt will automatically compile any `.scss` files to `.css` (if they don't have an underscore `_` prepended).
 
 ## Changelog
+
+### 1.2.1
+
+* Update documentation to switch to the `nokogiri` gem instead of the dead `hpricot` gem (thanks to @yuvio).
 
 ### 1.2.0
 
