@@ -70,7 +70,7 @@ To add new CSS files, it is recommended to create a new Sass (`.scss`) file for 
 
 ### 1.2.1
 
-* Update documentation to switch to the `nokogiri` gem instead of the dead `hpricot` gem (thanks to @yuvio).
+* Update documentation to switch to the `nokogiri` gem instead of the dead `hpricot` gem (thanks to @yuvilio).
 
 ### 1.2.0
 
