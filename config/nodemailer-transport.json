@@ -1,7 +1,7 @@
 {
 	"type": "SMTP",
 	"options": {
-		"service": "Gmail",
+		"service": "gmail",
 		"auth": {
 			"user": "GMAIL_USERNAME",
 			"pass": "GMAIL_PASSWORD"
